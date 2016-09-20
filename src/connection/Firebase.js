@@ -3,13 +3,7 @@ import firebase from 'firebase';
 export default class Firebase {
 
 	constructor() {
-		this.instance = firebase.initializeApp({
-    apiKey: "AIzaSyDQpQMCtbMlR8fj74XMslxSKQp25ZlDBeI",
-    authDomain: "reserver-driver.firebaseapp.com",
-    databaseURL: "https://reserver-driver.firebaseio.com",
-    storageBucket: "reserver-driver.appspot.com",
-    messagingSenderId: "48751074974"
-  });
+		this.instance = firebase.initializeApp('https://reserver-driver.firebaseio.com');
 		this.database = this.instance.database();
 		this.storage = this.instance.storage();
 		this.auth = this.instance.auth()
