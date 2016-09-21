@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --progress --color --watch"
   },
   "keywords": [],
   "author": "",
@@ -20,11 +21,17 @@
     "firebase": "^3.4.0",
     "flux": "^2.1.1",
     "json-loader": "^0.5.4",
+    "material-ui": "^0.15.4",
     "moment": "^2.15.0",
     "node-sass": "^3.10.0",
+    "prop-types": "^0.2.0",
     "react": "^15.3.1",
+    "react-custom-scrollbars": "^4.0.0",
     "react-dom": "^15.3.1",
     "react-hot-loader": "^3.0.0-beta.4",
+    "react-ripple-effect": "^1.0.4",
+    "react-router": "^2.8.1",
+    "react-tap-event-plugin": "^1.0.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2"
