@@ -13,8 +13,28 @@ export default class Firebase {
 		Firebase.storage = this.instance.storage();
 		Firebase.auth = this.instance.auth();
 	}
-	static atuhenticate(email, password){
+	static authenticate(email, password){
 
+	}
+
+	createUser(user){
+		Firebase.auth()
+			.createUserWithEmailAndPassword(user.email, user.password)
+			.then((result)=> {
+				var uid = result.uid;
+				Firebase.database()
+					.ref('users')
+					.set({
+						name:user.name,
+						email: user.email,
+						fone: user.fone,
+						address: user.address,
+						type: user.type
+				})
+			})
+			.catch((error)=> {
+				console.log('error', error);
+		});
 	}
 }
 /*

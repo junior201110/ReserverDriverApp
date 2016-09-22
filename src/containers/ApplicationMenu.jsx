@@ -4,16 +4,11 @@ import Paper from 'material-ui/Paper'
 import RippleButton from './../components/RippleButton.jsx';
 import {Link} from 'react-router';
 export default class ApplicationMenu extends Component{
-	constructor(props, context){
-		super(props, context);
-		this.state = {
-		}
-	}
 	render(){
 		return(
 				<Paper className="content">
 					<div className="options-content" >
-						<Link to={'/add'} >
+						<Link to={'/login'} >
 							<RippleButton>
 								Entar
 							</RippleButton>

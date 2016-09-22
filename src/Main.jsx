@@ -7,6 +7,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Router, Route, hashHistory} from 'react-router';
 import ApplicationMenu from './containers/ApplicationMenu.jsx'
+import Login from  './containers/Login.jsx'
 import './sass/main.scss';
 import './containers/applicationMenu.scss'
 injectTapEventPlugin();
@@ -32,6 +33,7 @@ render((
 	<Router history={hashHistory}>
 		<Route path="/" component={Main}>
 			<Route path="add" component={UserAdd}  />
+			<Route path="login" component={UserAdd}  />
 		</Route>
 	</Router>
 ), document.getElementById('container'));
