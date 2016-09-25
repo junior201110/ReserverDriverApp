@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-
+import firebase from "firebase";
+import UserController from './../controllers/UserController';
 export default class Firebase {
 	static init(){
 		Firebase.instance = firebase.initializeApp({
@@ -9,35 +9,69 @@ export default class Firebase {
 			storageBucket: "reserver-driver.appspot.com",
 			messagingSenderId: "48751074974"
 		});
-		Firebase.database = this.instance.database();
-		Firebase.storage = this.instance.storage();
-		Firebase.auth = this.instance.auth();
+		Firebase.database = Firebase.instance.database();
+		Firebase.storage = Firebase.instance.storage();
+		Firebase.auth = Firebase.instance.auth();
 	}
-	static authenticate(email, password){
-
+	static authenticate(email, password, authCb){
+		Firebase.auth.signInWithEmailAndPassword(email, password)
+			.then((data)=>{
+				if(authCb){
+					authCb(data);
+				}
+			})
+			.catch((error)=>{
+				throw error
+			})
 	}
 
-	createUser(user){
-		Firebase.auth()
+
+
+	static createUser(user){
+		Firebase.auth
 			.createUserWithEmailAndPassword(user.email, user.password)
 			.then((result)=> {
 				var uid = result.uid;
-				Firebase.database()
-					.ref('users')
-					.set({
-						name:user.name,
-						email: user.email,
-						fone: user.fone,
-						address: user.address,
-						type: user.type
-				})
+				var userRef = Firebase.database.ref('users').child(uid);
+				userRef.on('value',(data)=>{
+					var newUser = data.val();
+					Firebase.authenticate(user.email, user.password, (data)=>{
+						UserController.userCreate(newUser)
+					});
+				});
+				userRef.update({
+					uid: uid,
+					createAt: firebase.database.ServerValue.TIMESTAMP,
+					name:user.name,
+					email: user.email,
+					phone: user.phone,
+					defaultAddress: user.defaultAddress,
+					category: user.category,
+					photoURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/AWS_Simple_Icons_Non-Service_Specific_User.svg/2000px-AWS_Simple_Icons_Non-Service_Specific_User.svg.png'
+				});
 			})
 			.catch((error)=> {
 				console.log('error', error);
+			});
+	}
+
+	static findUserByUid(uid) {
+		var userRef = Firebase.database.ref('users').child(uid);
+		userRef.on('value',(data)=>{
+			var user = data.val();
+			UserController.userChange(user);
 		});
 	}
 }
+
 /*
+ {
+ name:user.name,
+ email: user.email,
+ phone: user.phone,
+ defaultAddres: user.defaultAddres,
+ category: user.type
+ }
  {
  apiKey: "AIzaSyDQpQMCtbMlR8fj74XMslxSKQp25ZlDBeI",
  authDomain: "reserver-driver.firebaseapp.com",

@@ -6,17 +6,19 @@ class Client{
 	constructor(){
 		this.name = '';
 		this.email = '';
-		this.fone = '';
-		this.address = {
-
-		};
+		this.password ='';
+		this.phone = '';
+		this.category = 'client'; //dirver
+		this.defaultAddress = ''
 	}
-
 }
 export default class ClientAdd extends Component{
 	constructor(props, context){
 		super(props, context);
 		this.state = {client: new Client()}
+	}
+	getClient(){
+		return this.state.client;
 	}
 	render(){
 		return(
@@ -45,62 +47,36 @@ export default class ClientAdd extends Component{
 				</CardText>
 				<CardText>
 					<TextField
-						floatingLabelText="Telefone"
+						floatingLabelText="Senha"
 						fullWidth={true}
 						onChange={(event, value)=>{
 					    var {client} = this.state;
-					    client.fone = value;
+					    client.password = value;
 					    this.setState({client});
 					  }}
 					/>
 				</CardText>
 				<CardText>
 					<TextField
-						floatingLabelText="Rua"
+						floatingLabelText="Telefone"
+						fullWidth={true}
 						onChange={(event, value)=>{
 					    var {client} = this.state;
-					    client.address.way = value;
+					    client.phone = value;
 					    this.setState({client});
 					  }}
 					/>
-					<TextField
-						floatingLabelText="Nº"
-						style={{width: 96}}
-						onChange={(event, value)=>{
-					    var {client} = this.state;
-					    client.address.number = value;
-					    this.setState({client});
-					  }}
-					/>
-					<div style={{display: 'flex'}}>
+				</CardText>
+				<CardText>
 						<TextField
 							fullWidth={true}
-							floatingLabelText="Bairro"
+							floatingLabelText="Endereço"
 							onChange={(event, value)=>{
 						    var {client} = this.state;
-						    client.address.neighborhood = value;
+						    client.defaultAddress = value;
 						    this.setState({client});
 						  }}
 						/>
-						<TextField
-							fullWidth={true}
-							style={{marginleft: 8}}
-							floatingLabelText="Cidade"
-							onChange={(event, value)=>{
-						    var {client} = this.state;
-						    client.address.city = value;
-						    this.setState({client});
-						  }}
-						/>
-					</div>
-					<TextField
-						floatingLabelText="Estado"
-						onChange={(event, value)=>{
-					    var {client} = this.state;
-					    client.address.province = value;
-					    this.setState({client});
-					  }}
-					/>
 				</CardText>
 			</div>
 		)

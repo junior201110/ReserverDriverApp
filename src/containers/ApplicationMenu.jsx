@@ -13,7 +13,7 @@ export default class ApplicationMenu extends Component{
 								Entar
 							</RippleButton>
 						</Link>
-						<Link to={'/add'}>
+						<Link to={'/adicionar'}>
 							<RippleButton>
 								Criar cadastro
 							</RippleButton>
