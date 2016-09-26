@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import UserController from './../controllers/UserController';
-
+import scheduleStore,{EVENT_ADD} from './../stores/ScheduleStore';
 export default class Firebase {
 	static init(){
 		Firebase.instance = firebase.initializeApp({
@@ -76,6 +76,14 @@ export default class Firebase {
 			}
 			userSchedulesCb(schedules)
 		})
+	}
+
+	static addNewSchedule(schedule) {
+		var scherduleRef = Firebase.database.ref('schedule');
+		var newSchedule = scherduleRef.push();
+		schedule.createAt  = firebase.database.ServerValue.TIMESTAMP;
+		newSchedule.update(schedule);
+		scheduleStore.emit(EVENT_ADD);
 	}
 }
 

@@ -10,6 +10,7 @@ import Context from './app/Context.jsx';
 import Login from  './containers/Login.jsx';
 import ClientDashboard from './client/Views/ClientDashboard.jsx';
 import ClientSchedules from './client/Views/ClientSchedules.jsx';
+import NewSchedule from './client/Views/NewSchedule.jsx';
 import './sass/main.scss';
 import './containers/applicationMenu.scss'
 injectTapEventPlugin();
@@ -37,7 +38,9 @@ render((
 			<Route path="adicionar" component={UserAdd}  />
 			<Route path="login" component={Login}  />
 			<Route path="cliente/:_uid" component={ClientDashboard} >
-				<Route path="chamadas" component={ClientSchedules} />
+				<Route path="chamadas" component={ClientSchedules}>
+					<Route path={'nova-chamada'} component={NewSchedule}/>
+				</Route>
 			</Route>
 			<Route path="administrativo" component={ClientDashboard} />
 		</Route>

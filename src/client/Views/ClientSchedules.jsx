@@ -1,13 +1,25 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ScheduleController from './../../controllers/ScheduleController';
-import {CardText} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton'
-import scheduleStore, {EVENT_RECEIVE_SCHEDULES} from './../../stores/ScheduleStore';
+import {CardText,Card, CardTitle} from 'material-ui/Card'
+import {List, ListItem} from 'material-ui/List';
+import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
+import userStore from './../../stores/UserStore';
+import scheduleStore, {EVENT_RECEIVE_SCHEDULES, EVENT_ADD} from './../../stores/ScheduleStore';
+import FlatButton from 'material-ui/FlatButton'
+import NewSchedule from './NewSchedule.jsx';
+import CircularProgress from 'material-ui/CircularProgress';
+
+import moment from 'moment';
+moment.locale('pt-br');
 export default class ClientSchedules extends Component{
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
 			schedules: [],
+			showDialog: false,
+			showLoader: false
 		};
 		setTimeout(()=>{
 			ScheduleController.getScheduleList(this.props.params._uid);
@@ -18,40 +30,57 @@ export default class ClientSchedules extends Component{
 		scheduleStore.on(EVENT_RECEIVE_SCHEDULES, (schedules)=>{
 			console.log(schedules);
 			this.setState({schedules: schedules})
-		})
+		});
 	}
 
 	render() {
 		return (
-			<div>
-				{this.state.schedules.map((schedule, i)=>{
-					return (
-						<div key={'scehduleListItem'+i} >
-							{schedule.clientDisplayName} -> {schedule.driverDisplayName}
-						</div>
-					)
-				})}
-				<div style={{
-					position: 'fixed',
-					width: '98vw',
-					bottom: 0,
-					padding: 8
-				}} className="scheduleNew" >
-					<div>
-						<RaisedButton
-							onClick={()=>{
 
-							}}
-							label={'Realizar Chamada'}
-							primary={true}
-						/>
+			<div>
+				{this.props.children ||
+				(<div><Card>
+					<CardTitle title="Chamadas"/>
+					<CardText style={{padding:0}}>
+						<List style={{height: 'calc(100vh - 212px)', overflow: 'auto'}} >
+							{this.state.schedules.map((schedule, i)=>{
+								return (
+									<ListItem
+										primaryText={'Camada para '+
+										moment(schedule.startTimestamp).format('LL')}
+										key={'scehduleListItem'+i} />
+								)
+							})}
+						</List>
+					</CardText>
+				</Card>
+					<div style={{
+						position: 'fixed',
+						width: '98vw',
+						bottom: 0,
+						padding: 8
+					}} className="scheduleNew">
+
+						<div>
+							<RaisedButton
+								onClick={()=>{
+									this.context.router.push({
+										pathname: '/cliente/'+userStore.getCurrentUser().uid+'/chamadas/nova-chamada'
+									})
+								}}
+								label={'Realizar Chamada'}
+								primary={true}
+							/>
+						</div>
 					</div>
-				</div>
+				</div>)}
 			</div>
 		);
 	}
 
 }
+ClientSchedules.contextTypes = {
+	router: PropTypes.object
+};
 /*
  * clientDisplayName:
  "Daniela Fabri"
