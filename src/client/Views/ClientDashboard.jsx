@@ -13,9 +13,11 @@ export default class ClientDashboard extends Component{
 			client: client,
 			open: false
 		};
+
 		if(client === null){
 			UserController.requestAuthenticate(props.params._uid)
 		}
+
 	}
 
 	componentDidMount() {
@@ -45,7 +47,15 @@ export default class ClientDashboard extends Component{
 					docked={false}
 					disableSwipeToOpen={true}
 					open={this.state.open}>
+					<MenuItem primaryText={'Inicio'} onTouchTap={()=>{
+						this.setState({open: false});
+						this.context.router.push({
+							pathname: '/cliente/'+ this.props.params._uid
+						})
+					}}
+					/>
 					<MenuItem primaryText={'Chamadas'} onTouchTap={()=>{
+						this.setState({open: false});
 						this.context.router.push({
 							pathname: '/cliente/'+ this.props.params._uid +'/chamadas'
 						})

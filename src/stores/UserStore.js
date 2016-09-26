@@ -22,6 +22,10 @@ class UserStore extends EventEmiter{
 	setCurrentUser(user){
 		this.user = user;
 	}
+	getSchedules(){
+		firebase.getUserSchedules(this.user.uid)
+	}
+
 }
 var userStore = new UserStore();
 

@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import UserController from './../controllers/UserController';
+
 export default class Firebase {
 	static init(){
 		Firebase.instance = firebase.initializeApp({
@@ -13,6 +14,7 @@ export default class Firebase {
 		Firebase.storage = Firebase.instance.storage();
 		Firebase.auth = Firebase.instance.auth();
 	}
+
 	static authenticate(email, password, authCb){
 		Firebase.auth.signInWithEmailAndPassword(email, password)
 			.then((data)=>{
@@ -24,8 +26,6 @@ export default class Firebase {
 				throw error
 			})
 	}
-
-
 
 	static createUser(user){
 		Firebase.auth
@@ -62,16 +62,24 @@ export default class Firebase {
 			UserController.userChange(user);
 		});
 	}
+
+	static getUserSchedules(uid, userSchedulesCb) {
+		var scherduleRef = Firebase.database.ref('schedule');
+		scherduleRef.on('value',(data)=>{
+			var schedules = [];
+			var tmpSchedules = data.val();
+			for(var s in tmpSchedules){
+				var schedule =  tmpSchedules[s];
+				if(schedule.clientUid == uid){
+					schedules.push(schedule)
+				}
+			}
+			userSchedulesCb(schedules)
+		})
+	}
 }
 
 /*
- {
- name:user.name,
- email: user.email,
- phone: user.phone,
- defaultAddres: user.defaultAddres,
- category: user.type
- }
  {
  apiKey: "AIzaSyDQpQMCtbMlR8fj74XMslxSKQp25ZlDBeI",
  authDomain: "reserver-driver.firebaseapp.com",
