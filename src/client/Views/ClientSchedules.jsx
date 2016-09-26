@@ -10,7 +10,8 @@ import scheduleStore, {EVENT_RECEIVE_SCHEDULES, EVENT_ADD} from './../../stores/
 import FlatButton from 'material-ui/FlatButton'
 import NewSchedule from './NewSchedule.jsx';
 import CircularProgress from 'material-ui/CircularProgress';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add'
 import moment from 'moment';
 moment.locale('pt-br');
 export default class ClientSchedules extends Component{
@@ -38,39 +39,38 @@ export default class ClientSchedules extends Component{
 
 			<div>
 				{this.props.children ||
-				(<div><Card>
-					<CardTitle title="Chamadas"/>
-					<CardText style={{padding:0}}>
-						<List style={{height: 'calc(100vh - 212px)', overflow: 'auto'}} >
-							{this.state.schedules.map((schedule, i)=>{
-								return (
-									<ListItem
-										primaryText={'Camada para '+
-										moment(schedule.startTimestamp).format('LL')}
-										key={'scehduleListItem'+i} />
-								)
-							})}
-						</List>
+				(<div>
+					<CardText>
+						<CardTitle title="Chamadas"/>
+						<CardText style={{padding:0}}>
+							<List style={{height: 'calc(100vh - 212px)', overflow: 'auto'}} >
+								{this.state.schedules.map((schedule, i)=>{
+									return (
+										<ListItem
+											primaryText={'Camada para '+
+											moment(schedule.startTimestamp).format('LL')}
+											key={'scehduleListItem'+i} />
+									)
+								})}
+							</List>
+						</CardText>
 					</CardText>
-				</Card>
 					<div style={{
-						position: 'fixed',
-						width: '98vw',
-						bottom: 0,
+						position: 'absolute',
+						bottom: 16,
+						right: 16,
 						padding: 8
 					}} className="scheduleNew">
 
-						<div>
-							<RaisedButton
-								onClick={()=>{
-									this.context.router.push({
-										pathname: '/cliente/'+userStore.getCurrentUser().uid+'/chamadas/nova-chamada'
-									})
-								}}
-								label={'Realizar Chamada'}
-								primary={true}
-							/>
-						</div>
+						<FloatingActionButton
+							onClick={()=>{
+								this.context.router.push({
+									pathname: '/cliente/'+userStore.getCurrentUser().uid+'/chamadas/nova-chamada'
+								})
+							}}
+						>
+							<ContentAdd />
+						</FloatingActionButton>
 					</div>
 				</div>)}
 			</div>

@@ -68,7 +68,7 @@ export default class NewSchedule extends Component{
 	render() {
 		return (
 			<div>
-				<Scrollbars style={{height: 'calc(100vh - 136px)'}} >
+				<Scrollbars style={{height: 'calc(100vh - 176px)'}} >
 					<CardText>
 						<SelectField
 							fullWidth={true}

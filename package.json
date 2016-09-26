@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --progress --color --watch"
+    "watch": "webpack --progress --color --watch",
+    "watch:server":"webpack-dev-server --progress --color --watch"
   },
   "keywords": [],
   "author": "",

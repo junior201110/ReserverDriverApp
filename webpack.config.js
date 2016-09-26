@@ -43,7 +43,7 @@ module.exports = {
 	},
 	devServer: {
 		contentBase: './public',
-		host: '192.168.25.6',
+		host: 'localhost',
 		hot: true,
 		port: 4001,
 		publicPath: './public',
