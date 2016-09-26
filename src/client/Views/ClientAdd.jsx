@@ -27,7 +27,7 @@ export default class ClientAdd extends Component {
             <div>
                 <CardText>
                     <TextField
-                        floatingLabelText="Nome"
+                        floatingLabelText="Nome e Sobrenome"
                         fullWidth={true}
                         onChange={(event, value)=>{
 					    var {client} = this.state;
@@ -61,8 +61,9 @@ export default class ClientAdd extends Component {
                 </CardText>
                 <CardText>
                     <TextField
-                        floatingLabelText="Telefone"
+                        floatingLabelText="Celular"
                         fullWidth={true}
+                        hintText="(32)9...-...."
                         onChange={(event, value)=>{
 					    var {client} = this.state;
 					    client.phone = value;
@@ -73,7 +74,9 @@ export default class ClientAdd extends Component {
                 <CardText>
                     <TextField
                         fullWidth={true}
-                        floatingLabelText="Endereço"
+                        floatingLabelText="Endereço Completo"
+                        multiLine={true}
+                        rows={3}
                         onChange={(event, value)=>{
 						    var {client} = this.state;
 						    client.defaultAddress = value;
