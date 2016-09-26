@@ -1,4 +1,4 @@
-.content{
+.content {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -10,27 +10,23 @@
   max-height: 400px;
   box-sizing: border-box;
   padding: 8px;
-  .options-content{
+  .options-content {
     text-align: center;
     display: flex;
-    align-content: center;
-    height:100%;
-    > a {
-      flex: 1;
-      line-height: 24;
-      cursor: pointer;
-      transition: all 450ms linear;
-      background: transparent;
-      transform: scale(0.97, 0.97);
-      color: #000;
-      text-decoration: none;
-    }
-    > a:hover{
-      background: #ccc;
-      transform: scale(1, 1)
-    }
+    flex-direction: column;
+    height: 100%;
   }
 }
-.content-large{
+
+.content-large {
   max-height: 654px;
+}
+
+.logo-container {
+  .logo {
+    width: 75%;
+    left: auto;
+    position: relative;
+    margin: 5%;
+  }
 }

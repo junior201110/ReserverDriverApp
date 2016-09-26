@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --color --watch",
+    "start": "npm run server & webpack -w -d --progress --color --display-error-details --define process.env.NODE_ENV='\"dev\"'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --progress --color --watch",
-    "watch:server":"webpack-dev-server --progress --color --watch"
+    "watch:server": "webpack-dev-server --progress --color --watch",
+    "server": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -37,6 +38,11 @@
     "react-tap-event-plugin": "^1.0.0",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
+    "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.16.0",
+    "connect-history-api-fallback": "^1.3.0",
     "webpack": "^1.13.2"
   }
 }

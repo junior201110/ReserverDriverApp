@@ -1,18 +1,27 @@
 import firebase from "firebase";
 import UserController from './../controllers/UserController';
 import scheduleStore,{EVENT_ADD} from './../stores/ScheduleStore';
+
+var configDev = {
+    apiKey: "AIzaSyDQpQMCtbMlR8fj74XMslxSKQp25ZlDBeI",
+    authDomain: "reserver-driver.firebaseapp.com",
+    databaseURL: "https://reserver-driver.firebaseio.com",
+    storageBucket: "reserver-driver.appspot.com",
+    messagingSenderId: "48751074974",
+    serverKey:"AIzaSyAFlC2mg7k1bUQudUsUteU01VbVBKaJItQ" // cloudmesssaging
+};
+// var configProd = {
+//     apiKey: "AIzaSyD_prGBCQo3pO6McqI9dzIAxlut-u-8ciY",
+//     authDomain: "onlydrivers-7af0a.firebaseapp.com",
+//     databaseURL: "https://onlydrivers-7af0a.firebaseio.com",
+//     storageBucket: "onlydrivers-7af0a.appspot.com",
+//     messagingSenderId: "1024033044845"
+// }
+
+
 export default class Firebase {
 	static init(){
-		Firebase.instance = firebase.initializeApp({
-			apiKey: "AIzaSyDQpQMCtbMlR8fj74XMslxSKQp25ZlDBeI",
-			authDomain: "reserver-driver.firebaseapp.com",
-			databaseURL: "https://reserver-driver.firebaseio.com",
-			storageBucket: "reserver-driver.appspot.com",
-			messagingSenderId: "48751074974"
-		});
-		Firebase.database = Firebase.instance.database();
-		Firebase.storage = Firebase.instance.storage();
-		Firebase.auth = Firebase.instance.auth();
+		Firebase.instance = firebase.initializeApp(configDev);
 	}
 
 	static authenticate(email, password, authCb){

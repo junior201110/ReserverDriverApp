@@ -61,7 +61,7 @@ export default class Login extends Component{
 									this.setState({showLoader: true})
 									UserController.authenticateByUserAndPass(this.state)
 								}}
-								label="Enviar"
+								label="Entrar"
 							/>
 						</CardText>
 					</div>}

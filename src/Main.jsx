@@ -3,6 +3,8 @@ import {render} from 'react-dom'
 import Firebase from './connection';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import UserAdd from './containers/UserAdd.jsx';
+import MuiTheme from './MuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Router, Route, hashHistory} from 'react-router';
 import ApplicationMenu from './containers/ApplicationMenu.jsx'
@@ -14,35 +16,36 @@ import NewSchedule from './client/Views/NewSchedule.jsx';
 import './sass/main.scss';
 import './containers/applicationMenu.scss'
 injectTapEventPlugin();
-class Main extends Component{
-	constructor(props, context) {
-		super(props, context);
-		Firebase.init()
-	}
 
-	render(){
-		return (
-			<Context>
-				<MuiThemeProvider>
-					<div>
-						{this.props.children || <ApplicationMenu /> }
-					</div>
-				</MuiThemeProvider>
-			</Context>
-		)
-	}
+class Main extends Component {
+    constructor(props, context) {
+        super(props, context);
+        Firebase.init()
+    }
+
+    render() {
+        return (
+            <Context>
+                <MuiThemeProvider muiTheme={MuiTheme}>
+                    <div>
+                        {this.props.children || <ApplicationMenu /> }
+                    </div>
+                </MuiThemeProvider>
+            </Context>
+        )
+    }
 }
 render((
-	<Router history={hashHistory}>
-		<Route path="/" component={Main}>
-			<Route path="adicionar" component={UserAdd}  />
-			<Route path="login" component={Login}  />
-			<Route path="cliente/:_uid" component={ClientDashboard} >
-				<Route path="chamadas" component={ClientSchedules}>
-					<Route path={'nova-chamada'} component={NewSchedule}/>
-				</Route>
-			</Route>
-			<Route path="administrativo" component={ClientDashboard} />
-		</Route>
-	</Router>
+    <Router history={hashHistory}>
+        <Route path="/" component={Main}>
+            <Route path="adicionar" component={UserAdd}/>
+            <Route path="login" component={Login}/>
+            <Route path="cliente/:_uid" component={ClientDashboard}>
+                <Route path="chamadas" component={ClientSchedules}>
+                    <Route path={'nova-chamada'} component={NewSchedule}/>
+                </Route>
+            </Route>
+            <Route path="administrativo" component={ClientDashboard}/>
+        </Route>
+    </Router>
 ), document.getElementById('container'));

@@ -118,15 +118,6 @@ export default class NewSchedule extends Component{
 					<CardText>
 						<span>Data e Hora de ínicio</span>
 						<div style={{display: 'flex', flexWrap: 'wrap'}} >
-							<TimePicker
-								fullWidth={true}
-								format="24hr"
-								hintText="Hora"
-								value={this.state.hour}
-								onChange={(hour, date)=>{
-									this.setState({hour: date})
-								}}
-							/>
 							<DatePicker
 								fullWidth={true}
 								firstDayOfWeek={0}
@@ -137,6 +128,15 @@ export default class NewSchedule extends Component{
 								value={this.state.date}
 								onChange={(a,date)=>{
 									this.setState({date: date})
+								}}
+							/>
+							<TimePicker
+								fullWidth={true}
+								format="24hr"
+								hintText="Hora"
+								value={this.state.hour}
+								onChange={(hour, date)=>{
+									this.setState({hour: date})
 								}}
 							/>
 						</div>

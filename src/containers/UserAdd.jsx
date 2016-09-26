@@ -35,7 +35,6 @@ export default class UserAdd extends Component{
 			data = driver;
 			data.active = false;
 		}
-
 		data.category = this.state.category;
 		UserController.requestAdd(data);
 	}
@@ -47,7 +46,7 @@ export default class UserAdd extends Component{
 	componentWillUnmount() {
 		userStore.removeListener(EVENT_USER_CREATE, this.onUserChange);
 	}
-//``
+
 	onUserChange(user){
 		this.setState({showLoader: false});
 		this.context.router.push({
